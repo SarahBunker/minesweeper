@@ -4,7 +4,7 @@ import Cell from './Cell';
 
 /*
 cell = {
-  hidden: true,
+  hidden: false,
   flagged: false,
   mine: false,
   count: 0,
@@ -16,6 +16,9 @@ cell = {
 // }
 
 // function setCount(board) {
+// }
+
+// function revealMines(board) {
 // }
 
 function fillBoard() {
@@ -34,62 +37,62 @@ const Board = () => {
   let newboard = [
     {
       hidden: true,
-      flagged: true,
+      flagged: false,
       mine: false,
-      count: 0,
+      count: 1,
       id: 1,
     },
     {
       hidden: true,
       flagged: false,
       mine: false,
-      count: 0,
+      count: 2,
       id: 2,
     },
     {
-      hidden: true,
+      hidden: false,
       flagged: false,
       mine: false,
-      count: 0,
+      count: 3,
       id: 3,
     },
     {
       hidden: true,
-      flagged: false,
+      flagged: true,
       mine: false,
-      count: 0,
+      count: 4,
       id: 4,
     },
     {
-      hidden: true,
+      hidden: false,
       flagged: false,
       mine: false,
-      count: 0,
+      count: 5,
       id: 5,
     },
     {
-      hidden: true,
+      hidden: false,
       flagged: false,
       mine: false,
-      count: 0,
+      count: 6,
       id: 6,
     },
     {
-      hidden: true,
+      hidden: false,
       flagged: false,
       mine: false,
-      count: 0,
+      count: 7,
       id: 7,
     },
     {
-      hidden: true,
+      hidden: false,
       flagged: false,
       mine: false,
-      count: 0,
+      count: 8,
       id: 8,
     },
     {
-      hidden: true,
+      hidden: false,
       flagged: false,
       mine: false,
       count: 0,
@@ -98,7 +101,14 @@ const Board = () => {
   ]
   return (
     <div className="board">
-      {newboard.map(cell => <Cell id={cell.id} key={cell.id}/>)}
+      {newboard.map(cell => <Cell
+        id={cell.id}
+        key={cell.id}
+        hidden={cell.hidden}
+        flagged={cell.flagged}
+        mine={cell.mine}
+        count={cell.count}
+      />)}
     </div>
   );
 };
