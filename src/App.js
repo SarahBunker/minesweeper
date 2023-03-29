@@ -8,6 +8,8 @@ function App() {
         <p>Number of Bombs left: __</p>
         <p>Number of safe squares left: __</p>
         <Board />
+        <button>New Game</button>
+        <p>Rules</p>
       </div>
     </div>
   );

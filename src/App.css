@@ -12,15 +12,28 @@
 
 .board {
   display: grid;
-  grid-template-columns: repeat( 10, 30px);
+  /* grid-template-columns: repeat( 10, 30px); */
+  grid-template-columns: repeat( 3, 30px);
   grid-auto-rows: 30px;
   border-radius: 10px;
   padding: 20px;
 }
 
-.board > button {
+.board > div {
   border-radius: 5px;
   padding: 10 px;
   background-color:  lightgrey;
   border: 1px solid blue;
+}
+
+.cell_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell_img {
+  width: 20px;
+  height: 20px;
+  /* border: 1px solid rebeccapurple; */
 }
