@@ -2,16 +2,6 @@ import React from 'react';
 import Cell from './Cell';
 // import { useState, useEffect } from 'react';
 
-/*
-cell = {
-  hidden: false,
-  flagged: false,
-  mine: false,
-  count: 0,
-  id: num,
-}
-*/
-
 // function setMines(board, numMines = 10) {
 // }
 
@@ -45,7 +35,7 @@ const Board = () => {
     {
       hidden: true,
       flagged: false,
-      mine: false,
+      mine: true,
       count: 2,
       id: 2,
     },

@@ -1,5 +1,19 @@
 import './App.css';
 import Board from './components/Board';
+// import { useState, useEffect } from 'react';
+
+// function countHiddenCells () {}
+// function countHiddenFlagged () {}
+// function countHiddenMines () {}
+
+// function setMines(board, numMines = 10) {
+// }
+
+// function setCount(board) {
+// }
+
+// function revealMines(board) {
+// }
 
 function App() {
   return (
