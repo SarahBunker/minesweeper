@@ -21,8 +21,26 @@ const Cell = ({id, hidden, flagged, mine, count}) => {
 
   let cellBody = deterimineCellBody()
 
+  function handleLeftClick(e) {
+    e.preventDefault()
+    if (e.type === 'click') {
+      console.log('Left click');
+    } else if (e.type === 'contextmenu') {
+      console.log('Right click');
+    }
+  }
+
+  function handleRightClick(e) {
+    e.preventDefault()
+    if (e.type === 'click') {
+      console.log('Left click');
+    } else if (e.type === 'contextmenu') {
+      console.log('Right click');
+    }
+  }
+
   return (
-    <div className={classCat.join(" ")}>
+    <div className={classCat.join(" ")} onClick={handleLeftClick} onContextMenu={handleRightClick}>
       {cellBody}
     </div>
   );
