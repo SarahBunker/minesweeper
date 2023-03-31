@@ -3,18 +3,11 @@ import Board from './components/Board';
 import { useState, useEffect } from 'react';
 
 const BOARD_LENGTH = 3
-const NUM_MINES = 1
-// import { useState, useEffect } from 'react';
+const NUM_MINES = 5
 
 // function countHiddenCells () {}
 // function countHiddenFlagged () {}
 // function countHiddenMines () {}
-
-// function setMines(board, numMines = 10) {
-// }
-
-// function setCount(board) {
-// }
 
 // function revealMines(board) {
 // }
@@ -48,7 +41,6 @@ function setBombs(board) {
     if (bombs.includes(cellID)) continue;
     bombs.push(cellID);
     let cell = findCellById(cellID, board)
-    console.log({cell})
     cell.mine = true;
   }
   return board
@@ -58,8 +50,7 @@ function findCellById(cellID, board) {
   return board.flat().filter( c => c.id === cellID)[0]
 }
 
-function findNearCellsByID(id, board) {
-  let cell = findCellById(id, board)
+function findNearCellsByID(cell, board) {
   let nearCells = [];
   for (let row = cell.row - 1; row <= cell.row + 1; row ++) {
     for (let col = cell.col - 1; col <= cell.col + 1; col ++) {
@@ -72,10 +63,27 @@ function findNearCellsByID(id, board) {
   return nearCells;
 }
 
+function findBombCells(board) {
+  return board.flat().filter(c => c.mine)
+}
+
+function tallyCounts(board) {
+  let bombIDs = findBombCells(board);
+  bombIDs.forEach( bombCell => addCountFromBomb(bombCell, board)  )
+}
+
+function addCountFromBomb(bombCell, board) {
+  let nearCells = findNearCellsByID(bombCell, board)
+  nearCells.forEach( cell => {
+    if (cell.mine) return;
+    cell.count ++
+  })
+}
+
 function newBoard() {
   let board = initialBoard();
-  setBombs(board)
-  console.log("near", findNearCellsByID(5, board))
+  setBombs(board);
+  tallyCounts(board);
   return board;
 }
 

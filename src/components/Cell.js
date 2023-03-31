@@ -7,20 +7,7 @@ const Cell = ({id, hidden, flagged, mine, count}) => {
 
   let countCat = { 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight" }
 
-  function createCellBody() {
-
-    // if (hidden) {
-    //   let imgPath
-    //   classCat.push("hidden")
-    //   if (flagged) {
-    //     imgPath = flagPath 
-    //   } else if(mine) {
-    //     imgPath = minePath
-    //   } else {
-    //     return
-    //   }
-    //   return (<img className="cell_img" src={flagPath} />)
-    // }
+  function deterimineCellBody() {
     if (hidden && flagged) {
       return (<img className="cell_img" src={flagPath} />)
     }
@@ -32,7 +19,7 @@ const Cell = ({id, hidden, flagged, mine, count}) => {
     return count
   }
 
-  let cellBody = createCellBody()
+  let cellBody = deterimineCellBody()
 
   return (
     <div className={classCat.join(" ")}>
@@ -42,6 +29,3 @@ const Cell = ({id, hidden, flagged, mine, count}) => {
 };
 
 export default Cell;
-
-{/* <img className="cell_img" src={ require ("../assets/flag.png") } /> */}
-{/* <img className="cell_img" src={ require ("../assets/mine.png") } /> */}
