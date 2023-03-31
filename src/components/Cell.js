@@ -9,17 +9,23 @@ const Cell = ({id, hidden, flagged, mine, count}) => {
 
   function createCellBody() {
 
-    if (hidden) {
-      let imgPath
-      classCat.push("hidden")
-      if (flagged) {
-        imgPath = flagPath 
-      } else if(mine) {
-        imgPath = minePath
-      } else {
-        return
-      }
-      return (<img className="cell_img" src={imgPath} />)
+    // if (hidden) {
+    //   let imgPath
+    //   classCat.push("hidden")
+    //   if (flagged) {
+    //     imgPath = flagPath 
+    //   } else if(mine) {
+    //     imgPath = minePath
+    //   } else {
+    //     return
+    //   }
+    //   return (<img className="cell_img" src={flagPath} />)
+    // }
+    if (hidden && flagged) {
+      return (<img className="cell_img" src={flagPath} />)
+    }
+    if (!hidden && mine) {
+      return (<img className="cell_img" src={minePath} />)
     }
     if (count === 0) return
     classCat.push(countCat[count])
