@@ -1,6 +1,6 @@
 import './App.css';
 import Board from './components/Board';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const BOARD_LENGTH = 3
 const NUM_MINES = 5
@@ -23,7 +23,7 @@ function initialBoard() {
     board.push([])
     for(let col = 0; col < BOARD_LENGTH; col ++) {
       board[row].push({ 
-        hidden: false,  //FIXME change to true, set to false for debugging
+        hidden: true,
         flagged: false, 
         mine: false, 
         count: 0, 
@@ -90,12 +90,26 @@ function newBoard() {
 function App() {
   const [board, setBoard] = useState(newBoard())
 
+  function handleLeft(id) {
+    let cell = findCellById(id, board);
+    
+    if (cell.flagged) return;
+    let newBoard = board.map( row => {
+      row.map( c => {
+        if (c.id === cell.id) c.hidden = false
+        return c
+      })
+      return row
+    })
+    setBoard(newBoard)
+  }
+
   return (
     <div className='app'>
       <div className='game'>
         <p>Number of Bombs left: __</p>
         <p>Number of safe squares left: __</p>
-        <Board board={board}/>
+        <Board board={board} handleLeft={handleLeft}/>
         <button>New Game</button>
         <p>Rules</p>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Cell from './Cell';
 
-const Board = ({board}) => {
+const Board = ({board, handleLeft}) => {
   let flatBoard = board.flat()
 
   return (
@@ -13,6 +13,7 @@ const Board = ({board}) => {
         flagged={cell.flagged}
         mine={cell.mine}
         count={cell.count}
+        handleLeft={handleLeft}
       />)}
     </div>
   );
