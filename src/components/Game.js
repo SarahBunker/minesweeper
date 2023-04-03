@@ -109,10 +109,13 @@ function revealMines(board) {
 const Game = () => {
   const [board, setBoard] = useState(newBoard())
   const [lostGame, setLostGame] = useState(false);
+  const [wonGame, setWonGame] = useState(false)
   let flagCount = board.flat().filter( cell => cell.flagged && cell.hidden).length
   let bombLeftCount = NUM_MINES - flagCount;
   let hiddenCount = board.flat().filter( cell => cell.hidden).length
   let safeSqCount = hiddenCount - bombLeftCount - flagCount;
+
+  if (safeSqCount === 0 && !wonGame) setWonGame(true)
 
   function handleLeftHiddenCell(cell, newBoard) {
     cell.hidden = false;
@@ -142,7 +145,7 @@ const Game = () => {
   }
 
   function handleLeft(id) {
-    if (lostGame) return;
+    if (wonGame || lostGame) return;
     let newBoard = dupBoard(board);
     let cell = findCellById(id, newBoard);
     if (cell.flagged) return;
@@ -151,7 +154,7 @@ const Game = () => {
   }
 
   function handleRight(id) {
-    if (lostGame) return;
+    if (wonGame || lostGame) return;
     let newBoard = dupBoard(board);
     let cell = findCellById(id, newBoard);
     if (!cell.hidden) return;
@@ -163,11 +166,15 @@ const Game = () => {
     e.preventDefault()
     setBoard(newBoard())
     setLostGame(false);
+    setWonGame(false);
   }
 
   function setGameHeader() {
+    if (wonGame) {
+      return <div className='won header'><h3>Yay! You this round.</h3></div>
+    }
     if (lostGame) {
-      return <div className='header'><h3>Sorry, you lost this round.</h3></div>
+      return <div className='lost header'><h3>Sorry, you lost this round.</h3></div>
     }
     return (
       <div className='header'>
