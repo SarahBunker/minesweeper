@@ -96,10 +96,18 @@ function App() {
 
   function handleLeft(id) {
     let newBoard = dupBoard(board);
-    let cell = findCellById(id, newBoard)
+    let cell = findCellById(id, newBoard);
     if (cell.flagged) return;
-    cell.hidden = false
-    setBoard(newBoard)
+    cell.hidden = false;
+    setBoard(newBoard);
+  }
+
+  function handleRight(id) {
+    let newBoard = dupBoard(board);
+    let cell = findCellById(id, newBoard);
+    if (!cell.hidden) return;
+    cell.flagged = !cell.flagged
+    setBoard(newBoard);
   }
 
   return (
@@ -107,7 +115,7 @@ function App() {
       <div className='game'>
         <p>Number of Bombs left: __</p>
         <p>Number of safe squares left: __</p>
-        <Board board={board} handleLeft={handleLeft}/>
+        <Board board={board} handleLeft={handleLeft} handleRight={handleRight}/>
         <button>New Game</button>
         <p>Rules</p>
       </div>
