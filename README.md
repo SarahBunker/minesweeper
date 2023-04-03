@@ -11,3 +11,8 @@ To Do's
 - dirt brown to clicked spots
 - change cursor to shovel
 - don't allow clicks if the click moves off the original tile?
+
+Breadcrumbs:
+Why is it hitting the
+  handleLeftVisibleCell
+when it is doing the recursive calls?

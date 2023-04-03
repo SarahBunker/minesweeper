@@ -114,12 +114,7 @@ const Game = () => {
   let hiddenCount = board.flat().filter( cell => cell.hidden).length
   let safeSqCount = hiddenCount - bombLeftCount - flagCount;
 
-  function handleLeft(id) {
-    if (lostGame) return;
-    // console.log({board})
-    let newBoard = dupBoard(board);
-    let cell = findCellById(id, newBoard);
-    if (cell.flagged) return;
+  function handleLeftHiddenCell(cell, newBoard) {
     cell.hidden = false;
     if (cell.mine) {
       setLostGame(true);
@@ -133,6 +128,19 @@ const Game = () => {
       })
     }
     setBoard(newBoard);
+  }
+
+  function handleLeftVisibleCell(cell, newBoard) {
+    console.log(`fix me. Cell Id: ${cell.id}`)
+  }
+
+  function handleLeft(id) {
+    if (lostGame) return;
+    let newBoard = dupBoard(board);
+    let cell = findCellById(id, newBoard);
+    if (cell.flagged) return;
+    if (cell.hidden) return handleLeftHiddenCell(cell, newBoard);
+    handleLeftVisibleCell(cell, newBoard);
   }
 
   function handleRight(id) {
