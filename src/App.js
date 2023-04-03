@@ -3,7 +3,7 @@ import Board from './components/Board';
 import { useState } from 'react';
 
 const BOARD_LENGTH = 3
-const NUM_MINES = 5
+const NUM_MINES = 4
 
 // function countHiddenCells () {}
 // function countHiddenFlagged () {}
@@ -80,6 +80,10 @@ function addCountFromBomb(bombCell, board) {
   })
 }
 
+function dupBoard(board) {
+  return board.slice();
+}
+
 function newBoard() {
   let board = initialBoard();
   setBombs(board);
@@ -91,16 +95,10 @@ function App() {
   const [board, setBoard] = useState(newBoard())
 
   function handleLeft(id) {
-    let cell = findCellById(id, board);
-    
+    let newBoard = dupBoard(board);
+    let cell = findCellById(id, newBoard)
     if (cell.flagged) return;
-    let newBoard = board.map( row => {
-      row.map( c => {
-        if (c.id === cell.id) c.hidden = false
-        return c
-      })
-      return row
-    })
+    cell.hidden = false
     setBoard(newBoard)
   }
 
