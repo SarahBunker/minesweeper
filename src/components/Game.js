@@ -115,6 +115,7 @@ const Game = () => {
   let safeSqCount = hiddenCount - bombLeftCount - flagCount;
 
   function handleLeft(id) {
+    if (lostGame) return;
     let newBoard = dupBoard(board);
     let cell = findCellById(id, newBoard);
     if (cell.flagged) return;
@@ -127,6 +128,7 @@ const Game = () => {
   }
 
   function handleRight(id) {
+    if (lostGame) return;
     let newBoard = dupBoard(board);
     let cell = findCellById(id, newBoard);
     if (!cell.hidden) return;
