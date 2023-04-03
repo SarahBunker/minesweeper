@@ -124,14 +124,21 @@ const Game = () => {
       let naighbors = findNearbyCells(cell, board)
       let hiddenNaighbors = naighbors.filter( cell => cell.hidden)
       hiddenNaighbors.forEach(cell => {
-        handleLeft(cell.id)
+        handleLeftHiddenCell(cell, newBoard)
       })
     }
     setBoard(newBoard);
   }
 
   function handleLeftVisibleCell(cell, newBoard) {
-    console.log(`fix me. Cell Id: ${cell.id}`)
+    let naighbors = findNearbyCells(cell, board)
+    let flaggedNaighbors = naighbors.filter( cell => cell.hidden && cell.flagged)
+    if (flaggedNaighbors.length === cell.count) {
+      let unclickedCells = naighbors.filter( cell => cell.hidden && !cell.flagged)
+      unclickedCells.forEach(cell => {
+        handleLeftHiddenCell(cell, newBoard)
+      })
+    }
   }
 
   function handleLeft(id) {
