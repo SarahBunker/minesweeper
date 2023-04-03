@@ -55,7 +55,7 @@ function findCellById(cellID, board) {
   return board.flat().filter( c => c.id === cellID)[0]
 }
 
-function findNearCellsByID(cell, board) {
+function findNearbyCells(cell, board) {
   let nearCells = [];
   for (let row = cell.row - 1; row <= cell.row + 1; row ++) {
     for (let col = cell.col - 1; col <= cell.col + 1; col ++) {
@@ -78,7 +78,7 @@ function tallyCounts(board) {
 }
 
 function addCountFromBomb(bombCell, board) {
-  let nearCells = findNearCellsByID(bombCell, board)
+  let nearCells = findNearbyCells(bombCell, board)
   nearCells.forEach( cell => {
     if (cell.mine) return;
     cell.count ++
@@ -116,6 +116,7 @@ const Game = () => {
 
   function handleLeft(id) {
     if (lostGame) return;
+    // console.log({board})
     let newBoard = dupBoard(board);
     let cell = findCellById(id, newBoard);
     if (cell.flagged) return;
@@ -123,6 +124,13 @@ const Game = () => {
     if (cell.mine) {
       setLostGame(true);
       revealMines(newBoard);
+    }
+    if (cell.count === 0 && !cell.mine) {
+      let naighbors = findNearbyCells(cell, board)
+      let hiddenNaighbors = naighbors.filter( cell => cell.hidden)
+      hiddenNaighbors.forEach(cell => {
+        handleLeft(cell.id)
+      })
     }
     setBoard(newBoard);
   }
