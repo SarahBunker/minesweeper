@@ -96,6 +96,16 @@ function newBoard() {
   return board;
 }
 
+function revealMines(board) {
+  return board.map( row => {
+    row.map( cell => {
+      if (cell.mine && !cell.flagged) cell.hidden = false;
+      return cell
+    })
+    return row
+  })
+}
+
 const Game = () => {
   const [board, setBoard] = useState(newBoard())
   const [lostGame, setLostGame] = useState(false);
@@ -109,7 +119,10 @@ const Game = () => {
     let cell = findCellById(id, newBoard);
     if (cell.flagged) return;
     cell.hidden = false;
-    if (cell.mine) setLostGame(true);
+    if (cell.mine) {
+      setLostGame(true);
+      revealMines(newBoard);
+    }
     setBoard(newBoard);
   }
 
