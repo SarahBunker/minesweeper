@@ -1,7 +1,7 @@
 import React from 'react';
 import Cell from './Cell';
 
-const Board = ({board, handleLeft, handleRight}) => {
+const Board = ({board, handleLeft, handleRight, lostGame}) => {
   let flatBoard = board.flat()
 
   return (
@@ -15,6 +15,7 @@ const Board = ({board, handleLeft, handleRight}) => {
         count={cell.count}
         handleLeft={handleLeft}
         handleRight={handleRight}
+        lostGame={lostGame}
       />)}
     </div>
   );
